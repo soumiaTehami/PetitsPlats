@@ -1,0 +1,20 @@
+body {
+    max-width: 1440px;
+    margin: 0 auto;
+    font-family: Anton, Arial, Sans-serif;
+  }
+  
+  header {
+    background: url('../../assets/site/lampos-aritonang-24gR_9lCdes-unsplash1.png');
+    height: 600px;;
+    background-size: cover;
+    max-height: 667px;
+    min-height: 380px;
+  }
+  .header-text {
+    color: #ffd15b;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 12% auto 0;
+    width: 69%;
+}
