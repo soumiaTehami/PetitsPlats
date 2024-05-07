@@ -6,12 +6,14 @@
     <title>Les Petits Plats</title>
     <!-- Liens vers les fichiers CSS -->
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
     <header>
         <img
           src="assets/icons/logo.png"
-          class="header--logo"
+          class="header-logo"
           alt="Logo"
           role="link"
           aria-label="homepage"
@@ -27,6 +29,11 @@
               placeholder="Rechercher une recette, un ingrédient, ..."
               id="searchInput"
             />
+            <span class="fa-stack fa-2x" role="button" tabindex="0">
+              <span class="fa-solid fa-square fa-stack-2x"></span>
+              <span class="fa-solid fa-magnifying-glass fa-stack-1x"></span>
+            </span>
+          </div>
     </header>
     
     <main>
@@ -37,10 +44,7 @@
         </section>
     </main>
 
-    <footer>
-        <!-- Pied de page -->
-        <p>&copy; 2024 Les Petits Plats</p>
-    </footer>
+   
 
     <!-- Scripts JavaScript -->
     <script src="script/index.js"></script>

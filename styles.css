@@ -18,3 +18,45 @@ body {
     margin: 12% auto 0;
     width: 69%;
 }
+.header-logo {
+    height: 25px;
+    width: 207px;
+    margin-top: 50px;
+    margin-left: 70px;
+  }
+  .header-input-elements {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+}
+
+.header-input {
+    width: 80%;
+    
+    padding-right: 40px;
+    height: 72px;
+    border-radius: 11px;
+    border: none;
+    font-size: 22px;
+    padding-left: 20px;
+}
+/* Styles pour l'icône de recherche */
+.fa-stack {
+  position: absolute;
+  top: 35px;
+  transform: translateY(-50%);
+  right: 80px; /* Ajustez la position selon vos besoins */
+}
+
+.fa-stack .fa-stack-2x {
+  color: #070606; /* Couleur du carré de fond */
+}
+
+.fa-stack .fa-stack-1x {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff; /* Couleur de l'icône de recherche */
+}
