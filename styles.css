@@ -60,3 +60,23 @@ body {
   transform: translate(-50%, -50%);
   color: #fff; /* Couleur de l'icône de recherche */
 }
+/* Conteneur des cartes de recettes */
+#recipeList {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux éléments de se réorganiser sur plusieurs lignes si nécessaire */
+  justify-content: space-between; /* Pour espacer les cartes de manière égale sur la ligne */
+}
+
+/* Style de base des cartes de recettes */
+.recipe-card {
+  width: calc(33.33% - 10px); /* Largeur de chaque carte (33.33% pour trois cartes sur la même ligne) */
+  margin-bottom: 20px; /* Marge en bas pour séparer les lignes */
+  box-sizing: border-box; /* Pour inclure les marges et bordures dans la largeur */
+  border: 1px solid #ccc; /* Bordure de chaque carte */
+  padding: 10px; /* Espacement interne des cartes */
+}
+
+/* Style spécifique pour l'image dans les cartes */
+.recipe-card img {
+  max-width: 100%; /* Pour que les images ne dépassent pas la largeur de leur conteneur */
+}
