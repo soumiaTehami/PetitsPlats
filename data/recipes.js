@@ -1,4 +1,4 @@
-const recipes = [
+export const recipes = [
     {
         "id": 1,
         "image": "Recette01.jpg",
@@ -1792,55 +1792,4 @@ function afficherCartesRecettes(recipes) {
         console.log("\n");
     }
 }
-
-// Appel de la fonction pour afficher les cartes de recettes
-afficherCartesRecettes(recipes);
-function createRecipeCard(recipe) {
-    const cardContainer = document.createElement('div');
-    cardContainer.classList.add('recipe-card');
-
-    // Image de la recette
-    const image = document.createElement('img');
-    image.src = recipe.image;
-    image.alt = recipe.name;
-    cardContainer.appendChild(image);
-
-    // Description de la recette
-    const descriptionPara = document.createElement('p');
-    descriptionPara.textContent = recipe.description; // Assure-toi que recipe.description est défini dans tes données de recette
-    cardContainer.appendChild(descriptionPara);
-
-    // Liste des ingrédients
-    const ingredientList = document.createElement('ul');
-    for (let i = 0; i < recipe.ingredients.length; i++) {
-        const ingredient = recipe.ingredients[i];
-        const listItem = document.createElement('li');
-        let text = ingredient.ingredient;
-        if (ingredient.quantity) {
-            text += `: ${ingredient.quantity}`;
-            if (ingredient.unit) {
-                text += ` ${ingredient.unit}`;
-            }
-        }
-        listItem.textContent = text;
-        ingredientList.appendChild(listItem);
-    }
-    cardContainer.appendChild(ingredientList);
-
-    return cardContainer;
-}
-
-
-
-// Fonction pour afficher les cartes de recette avec une boucle for
-function displayRecipeCardsWithForLoop(recipes) {
-    const recipeContainer = document.getElementById('recipeList');
-    for (let i = 0; i < recipes.length; i++) {
-        const card = createRecipeCard(recipes[i]);
-        recipeContainer.appendChild(card);
-    }
-}
-
-// Appel de la fonction pour afficher les cartes de recette
-displayRecipeCardsWithForLoop(recipes);
 
