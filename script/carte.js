@@ -28,11 +28,26 @@ function createRecipeCard(recipe) {
     image.src = `assets/photos/${recipe.image}`;
     image.alt = recipe.name;
     cardContainer.appendChild(image);
+// Titre de la recette
+const recipeTitle = document.createElement('p');
+recipeTitle.textContent =recipe.name;
+recipeTitle.classList.add('recipe-title');
+cardContainer.appendChild(recipeTitle);
+    // Titre "RECETTE"
+const titlePara = document.createElement('p');
+titlePara.textContent = 'RECETTE';
+titlePara.classList.add('recipe-section-title');
+cardContainer.appendChild(titlePara);
 
-    // Description de la recette
-    const descriptionPara = document.createElement('p');
-    descriptionPara.textContent = recipe.description; // Assure-toi que recipe.description est défini dans tes données de recette
-    cardContainer.appendChild(descriptionPara);
+// Description de la recette
+const descriptionPara = document.createElement('p');
+descriptionPara.textContent = recipe.description; // Assure-toi que recipe.description est défini dans tes données de recette
+cardContainer.appendChild(descriptionPara);
+// Titre "INGRÉDIENTS"
+const ingredientsTitle = document.createElement('p');
+ingredientsTitle.textContent = 'INGRÉDIENTS';
+cardContainer.appendChild(ingredientsTitle);
+
 
     // Liste des ingrédients
     const ingredientList = document.createElement('ul');

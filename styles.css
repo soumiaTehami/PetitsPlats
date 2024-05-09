@@ -73,10 +73,30 @@ body {
   margin-bottom: 20px; /* Marge en bas pour séparer les lignes */
   box-sizing: border-box; /* Pour inclure les marges et bordures dans la largeur */
   border: 1px solid #ccc; /* Bordure de chaque carte */
+  background-color: #fff;
   padding: 10px; /* Espacement interne des cartes */
 }
 
 /* Style spécifique pour l'image dans les cartes */
 .recipe-card img {
   max-width: 100%; /* Pour que les images ne dépassent pas la largeur de leur conteneur */
+}
+main {
+  background: #ededed;
+  height: 100%;
+  padding-bottom: 140px;
+}
+.recipe-title {
+  font-family: Anton, Arial, Sans-serif;
+  font-size: 18px;
+  font-weight: bold; /* Définit le texte en gras */
+  margin-top: 0;
+  padding-left: 15px;
+}
+.recipe-section-title{
+  font-family: Manrope, Arial, Sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color:#7a7a7a;
+    margin-bottom: 10px;
 }

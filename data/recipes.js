@@ -1774,22 +1774,5 @@ export const recipes = [
         "ustensils":["rouleau à patisserie","fouet"]
     }
 ]
-function afficherCartesRecettes(recipes) {
-    for (let i = 0; i < recipes.length; i++) {
-        const recipe = recipes[i];
-        console.log("Recette: " + recipe.name);
-        console.log("Ingrédients:");
-        recipe.ingredients.forEach(ingredient => {
-            if (ingredient.quantity && ingredient.unit) {
-                console.log("- " + ingredient.ingredient + ": " + ingredient.quantity + " " + ingredient.unit);
-            } else if (ingredient.quantity) {
-                console.log("- " + ingredient.ingredient + ": " + ingredient.quantity);
-            } else {
-                console.log("- " + ingredient.ingredient);
-            }
-        });
-        console.log("Nombre de parts: " + recipe.servings);
-        console.log("\n");
-    }
-}
+
 
