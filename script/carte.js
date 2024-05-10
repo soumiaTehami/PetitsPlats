@@ -29,6 +29,12 @@ function createRecipeCard(recipe) {
     image.alt = recipe.name;
     image.classList.add('recipe-image');
     cardContainer.appendChild(image);
+// Durée de la recette
+const recipeDuration = document.createElement('span');
+recipeDuration.classList.add('recipe-duration');
+recipeDuration.textContent = `${recipe.time} min`; // Utilisation de recipe.time au lieu de juste "time"
+cardContainer.appendChild(recipeDuration);
+
 // Titre de la recette
 const recipeTitle = document.createElement('p');
 recipeTitle.textContent =recipe.name;
@@ -52,24 +58,49 @@ ingredientsTitle.classList.add('recipe-section-title');
 cardContainer.appendChild(ingredientsTitle);
 
     // Liste des ingrédients
-    const ingredientList = document.createElement('ul');
-    for (let i = 0; i < recipe.ingredients.length; i++) {
-        const ingredient = recipe.ingredients[i];
-        const listItem = document.createElement('li');
-        let text = ingredient.ingredient;
-        if (ingredient.quantity) {
-            text += `: ${ingredient.quantity}`;
-            if (ingredient.unit) {
-                text += ` ${ingredient.unit}`;
-            }
-        }
-        listItem.textContent = text;
-        ingredientList.appendChild(listItem);
-    }
-    cardContainer.appendChild(ingredientList);
+ // Liste des ingrédients
+const ingredientList = document.createElement('ul');
+ingredientList.classList.add('recipe-ingredient-list');
 
-    return cardContainer;
+for (let i = 0; i < recipe.ingredients.length; i++) {
+    const ingredient = recipe.ingredients[i];
+    const listItem = document.createElement('li');
+    listItem.classList.add('ingredient'); // Ajouter la classe 'ingredient' à chaque élément de liste
+
+    let text = '';
+
+    if (ingredient.ingredient) {
+        text += `<span class="IngredientsName">${ingredient.ingredient}</span>`;
+    }
+
+    if (ingredient.quantity || ingredient.unit) {
+        text += `<span class="quantity-unit">`; // Ouvrir la balise <span> pour la quantité et l'unité
+        
+        if (ingredient.quantity) {
+            text += `${ingredient.quantity}`;
+        }
+
+        if (ingredient.quantity && ingredient.unit) {
+            text += ' '; // Ajouter un espace entre la quantité et l'unité si les deux sont présentes
+        }
+
+        if (ingredient.unit) {
+            text += `${ingredient.unit}`;
+        }
+        
+        text += `</span>`; // Fermer la balise <span> pour la quantité et l'unité
+    }
+
+    listItem.innerHTML = text;
+    ingredientList.appendChild(listItem);
 }
+
+cardContainer.appendChild(ingredientList);
+
+return cardContainer;
+
+
+}   
 
 
 
