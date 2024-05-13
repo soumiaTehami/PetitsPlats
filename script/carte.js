@@ -7,7 +7,7 @@ function afficherCartesRecettes(recipes) {
 }
 // Appel de la fonction pour afficher les cartes de recettes
 afficherCartesRecettes(recipes);
-function createRecipeCard(recipe) {
+export function createRecipeCard(recipe) {
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('recipe-card');
 
@@ -44,8 +44,6 @@ const ingredientsTitle = document.createElement('p');
 ingredientsTitle.textContent = 'INGRÉDIENTS';
 ingredientsTitle.classList.add('recipe-section-title');
 cardContainer.appendChild(ingredientsTitle);
-
-    // Liste des ingrédients
  // Liste des ingrédients
 const ingredientList = document.createElement('ul');
 ingredientList.classList.add('recipe-ingredient-list');
@@ -93,7 +91,7 @@ return cardContainer;
 
 
 // Fonction pour afficher les cartes de recette avec une boucle for
-function displayRecipeCardsWithForLoop(recipes) {
+ export function displayRecipeCardsWithForLoop(recipes) {
     const recipeContainer = document.getElementById('recipeList');
     for (let i = 0; i < recipes.length; i++) {
         const card = createRecipeCard(recipes[i]);
@@ -102,45 +100,5 @@ function displayRecipeCardsWithForLoop(recipes) {
 }
 
 // Appel de la fonction pour afficher les cartes de recette
-displayRecipeCardsWithForLoop(recipes);
+ displayRecipeCardsWithForLoop(recipes);
 
-// Fonction de recherche de recettes
-function rechercherRecettes(term) {
-    // Filtrer les recettes qui correspondent au terme de recherche
-    return recipes.filter(recipe =>
-        recipe.name.toLowerCase().includes(term.toLowerCase()) ||
-        recipe.description.toLowerCase().includes(term.toLowerCase())
-        // Vous pouvez étendre cette logique pour inclure d'autres propriétés des recettes dans votre recherche
-    );
-}
-
-// Fonction pour afficher les cartes de recettes filtrées
-function afficherCartesRecettesFiltrees(term) {
-    // Supprimer les anciennes cartes de recettes
-    const recipeContainer = document.getElementById('recipeList');
-    recipeContainer.innerHTML = '';
-
-    // Récupérer les recettes filtrées
-    const recipesFiltrees = rechercherRecettes(term);
-
-    // Afficher les nouvelles cartes de recettes filtrées
-    for (let i = 0; i < recipesFiltrees.length; i++) {
-        const card = createRecipeCard(recipesFiltrees[i]);
-        recipeContainer.appendChild(card);
-    }
-}
-
-// Appel initial pour afficher toutes les cartes de recettes
-displayRecipeCardsWithForLoop(recipes);
-
-// Ajouter un écouteur d'événement sur la barre de recherche
-const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("input", function(event) {
-    const searchTerm = event.target.value.trim();
-    if (searchTerm.length >= 3) {
-        afficherCartesRecettesFiltrees(searchTerm);
-    } else {
-        // Si le terme de recherche est trop court, afficher toutes les recettes
-        displayRecipeCardsWithForLoop(recipes);
-    }
-});

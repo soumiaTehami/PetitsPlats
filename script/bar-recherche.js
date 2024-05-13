@@ -1,22 +1,57 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Sélection de l'élément de saisie
-    var searchInput = document.getElementById("searchInput");
+import { recipes } from '/data/recipes.js';
+import {displayRecipeCardsWithForLoop,createRecipeCard} from './carte.js';
+// Fonction de recherche de recettes
+function rechercherRecettes(term) {
+    // Filtrer les recettes qui correspondent au terme de recherche
+    return recipes.filter(recipe =>
+        recipe.name.toLowerCase().includes(term.toLowerCase()) ||
+        recipe.description.toLowerCase().includes(term.toLowerCase())
+    
+    );
+}
 
-    // Ajout d'un écouteur d'événement "input"
-    searchInput.addEventListener("input", function(event) {
-        // Récupération de la valeur saisie
-        var inputValue = event.target.value;
+// Fonction pour afficher les cartes de recettes filtrées
+function afficherCartesRecettesFiltrees(term) {
+    // Supprimer les anciennes cartes de recettes
+    const recipeContainer = document.getElementById('recipeList');
+    recipeContainer.innerHTML = '';
 
-        // Vérification si la longueur de la valeur est supérieure ou égale à 3
-        if (inputValue.length >= 3) {
-            // Si oui, effectuez les actions souhaitées, par exemple :
-            console.log("Au moins 3 caractères entrés : ", inputValue);
-            // Vous pouvez appeler une fonction de recherche ici, par exemple :
-            // searchRecipes(inputValue);
-        } else {
-            // Si non, vous pouvez réinitialiser les résultats de recherche précédents, par exemple :
-            console.log("Moins de 3 caractères entrés");
-            // resetSearchResults();
-        }
+    // Récupérer les recettes filtrées
+    const recipesFiltrees = rechercherRecettes(term);
+
+    // Afficher les nouvelles cartes de recettes filtrées
+    for (let i = 0; i < recipesFiltrees.length; i++) {
+        const card = createRecipeCard(recipesFiltrees[i]);
+        recipeContainer.appendChild(card);
+    }
+}
+
+// Appel initial pour afficher toutes les cartes de recettes
+displayRecipeCardsWithForLoop(recipes);
+
+// Ajouter un écouteur d'événement sur la barre de recherche
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", function(event) {
+    const searchTerm = event.target.value.trim();
+    if (searchTerm.length >= 3) {
+        afficherCartesRecettesFiltrees(searchTerm);
+    } else {
+        // Si le terme de recherche est trop court, afficher toutes les recettes
+        displayRecipeCardsWithForLoop(recipes);
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var searchInput = document.getElementById('searchInput');
+    var clearSearchBtn = document.querySelector('.clear-search-btn');
+
+    // Afficher le bouton "X" lorsque le champ de recherche a du texte
+    searchInput.addEventListener('input', function() {
+        clearSearchBtn.style.display = this.value.length ? 'block' : 'none';
+    });
+
+    // Effacer le contenu du champ de recherche lorsqu'on clique sur le bouton "X"
+    clearSearchBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        clearSearchBtn.style.display = 'none';
     });
 });

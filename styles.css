@@ -44,9 +44,9 @@ body {
 /* Styles pour l'icône de recherche */
 .fa-stack {
   position: absolute;
-  top: 35px;
+  top: 30px;
   transform: translateY(-50%);
-  right: 80px; /* Ajustez la position selon vos besoins */
+  right: 90px; /* Ajustez la position selon vos besoins */
 }
 
 .fa-stack .fa-stack-2x {
@@ -59,6 +59,16 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff; /* Couleur de l'icône de recherche */
+}
+.clear-search-btn {
+  position: relative;
+  right: 90px;
+  top:25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color:rgb(122, 122, 122);
+  font-size: 2.5rem; /* Taille de la police */
+  display: none;
 }
 /* Conteneur des cartes de recettes */
 #recipeList {
