@@ -181,7 +181,52 @@ main {
     font-weight: 500;
     margin-bottom: -5px;
     margin-top: -5px;
+}/* Style pour le bouton dropdown */
+.dropdown-btn {
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between; /* Aligne les éléments sur les bords du conteneur */
+  align-items: center; /* Centre les éléments verticalement */
+  text-align: center;
+  outline: none;
 }
+
+.dropdown-btn div {
+  display: flex;
+  align-items: center; /* Centre les éléments verticalement */
+  gap: 40px;
+}
+
+
+/* Style pour le contenu du dropdown */
+.dropdown-content {
+  display: none;
+  padding: 5px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+/* Style pour le chevron */
+.fa-chevron-down {
+  transition: transform 0.3s ease; /* Animation de transition */
+}
+
+/* Style pour le chevron lorsque le bouton est ouvert */
+.dropdown-btn.active .fa-chevron-down {
+  transform: rotate(180deg); /* Rotation du chevron */
+}
+.dropdowns{
+  display: flex;
+  gap: 40px;
+}
+
+
 
 
 

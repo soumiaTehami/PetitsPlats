@@ -1,59 +1,81 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Petits Plats</title>
-    <!-- Liens vers les fichiers CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Petits Plats</title>
+  <!-- Liens vers les fichiers CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 </head>
+
 <body>
-    <header>
-        <img
-          src="assets/icons/logo.png"
-          class="header-logo"
-          alt="Logo"
-          role="link"
-          aria-label="homepage"
-        />
-        <h1 class="header-text">
-            CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES
-          </h1>
-        <!-- Barre de recherche -->
-        <div class="header-input-elements">
-            <input
-              type="text"
-              class="header-input"
-              placeholder="Rechercher une recette, un ingrédient, ..."
-              id="searchInput"
-            />
-             <span class="clear-search-btn">&times;</span>
-            <span class="fa-stack fa-2x " role="button" tabindex="0">
-              <span class="fa-solid fa-square fa-stack-2x"></span>
-              <span class="fa-solid fa-magnifying-glass fa-stack-1x"></span>
-            </span>
-          </div>
-    </header>
-      <div>
-
+  <header>
+    <img src="assets/icons/logo.png" class="header-logo" alt="Logo" role="link" aria-label="homepage" />
+    <h1 class="header-text">
+      CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES
+    </h1>
+    <!-- Barre de recherche -->
+    <div class="header-input-elements">
+      <input type="text" class="header-input" placeholder="Rechercher une recette, un ingrédient, ..."
+        id="searchInput" />
+      <span class="clear-search-btn">&times;</span>
+      <span class="fa-stack fa-2x " role="button" tabindex="0">
+        <span class="fa-solid fa-square fa-stack-2x"></span>
+        <span class="fa-solid fa-magnifying-glass fa-stack-1x"></span>
+      </span>
+    </div>
+  </header>
+  <div class="dropdowns">
+    <button class="dropdown-btn"  onclick="toggleDropdown('ingredientsList', this)">
+      <div><h3>Ingrédients</h3>  
+        <i class="fas fa-chevron-down"></i>
       </div>
-    <main>
-        <!-- Contenu principal -->
-        <section id="recipeList">
-            <!-- Liste des recettes -->
-            <!-- Les recettes seront ajoutées dynamiquement ici -->
-        </section>
-    </main>
+     
+    </button>
+    <div class="dropdown-content">
+      <ul id="ingredientsList">
+        <!-- Les ingrédients seront ajoutés dynamiquement ici -->
+        
+      </ul>
+    </div>
 
-    
-   
+    <button class="dropdown-btn"  onclick="toggleDropdown('ingredientsList', this)">
+      <div><h3>Appareil</h3>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+     
+    </button>
+    <div class="dropdown-content">
+    </div>
 
-    <!-- Scripts JavaScript -->
-    <script src="script/carte.js" type="module"></script>
-    <script src="data/recipes.js" type="module"></script>
-    <script src="script/bar-recherche.js" type="module"></script>
-    
+    <button class="dropdown-btn"  onclick="toggleDropdown('ingredientsList', this)">
+      <div> <h3>Ustensiles</h3>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      
+    </button>
+    <div class="dropdown-content">
+      <ul id="utensilsList">
+        <!-- Les ustensiles seront ajoutés dynamiquement ici -->
+      </ul>
+    </div>
+  </div>
+  <main>
+    <!-- Contenu principal -->
+    <section id="recipeList">
+      <!-- Liste des recettes -->
+      <!-- Les recettes seront ajoutées dynamiquement ici -->
+    </section>
+  </main>
+  <!-- Scripts JavaScript -->
+  <script src="script/carte.js" type="module"></script>
+  <script src="data/recipes.js" type="module"></script>
+  <script src="script/bar-recherche.js" type="module"></script>
+  <script src="script/dropdown.js"></script>
+
 </body>
+
 </html>
