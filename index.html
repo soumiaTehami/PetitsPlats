@@ -21,49 +21,34 @@
     <div class="header-input-elements">
       <input type="text" class="header-input" placeholder="Rechercher une recette, un ingrédient, ..."
         id="searchInput" />
-      <span class="clear-search-btn">&times;</span>
-      <span class="fa-stack fa-2x " role="button" tabindex="0">
-        <span class="fa-solid fa-square fa-stack-2x"></span>
-        <span class="fa-solid fa-magnifying-glass fa-stack-1x"></span>
-      </span>
+        <span class="clear-search-btn">&times;</span>
+        <span class="fa-stack fa-2x " role="button" tabindex="0">
+          <span class="fa-solid fa-square fa-stack-2x"></span>
+          <span class="fa-solid fa-magnifying-glass fa-stack-1x"></span>
+        </span>
+        
     </div>
   </header>
-  <div class="dropdowns">
-    <button class="dropdown-btn"  onclick="toggleDropdown('ingredientsList', this)">
-      <div><h3>Ingrédients</h3>  
-        <i class="fas fa-chevron-down"></i>
-      </div>
-     
-    </button>
-    <div class="dropdown-content">
-      <ul id="ingredientsList">
-        <!-- Les ingrédients seront ajoutés dynamiquement ici -->
-        
-      </ul>
-    </div>
-
-    <button class="dropdown-btn"  onclick="toggleDropdown('ingredientsList', this)">
-      <div><h3>Appareil</h3>
-        <i class="fas fa-chevron-down"></i>
-      </div>
-     
-    </button>
-    <div class="dropdown-content">
-    </div>
-
-    <button class="dropdown-btn"  onclick="toggleDropdown('ingredientsList', this)">
-      <div> <h3>Ustensiles</h3>
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      
-    </button>
-    <div class="dropdown-content">
-      <ul id="utensilsList">
-        <!-- Les ustensiles seront ajoutés dynamiquement ici -->
-      </ul>
-    </div>
-  </div>
   <main>
+    <div class="dropdowns">
+      <button class="dropdown-btn" id="dropdownButton">
+          <div>
+              <h3>Ingrédients</h3>  
+              <i class="fas fa-chevron-down"></i>
+              <div class="dropdown-content">
+                <ul id="ingredientsList">
+                    <!-- Les ingrédients seront ajoutés dynamiquement ici -->
+                </ul>
+            </div>
+          </div>
+      </button>
+      
+  </div>
+  
+  
+  
+      
+
     <!-- Contenu principal -->
     <section id="recipeList">
       <!-- Liste des recettes -->
@@ -74,7 +59,7 @@
   <script src="script/carte.js" type="module"></script>
   <script src="data/recipes.js" type="module"></script>
   <script src="script/bar-recherche.js" type="module"></script>
-  <script src="script/dropdown.js"></script>
+  <script src="script/dropdown.js" type="module"></script>
 
 </body>
 

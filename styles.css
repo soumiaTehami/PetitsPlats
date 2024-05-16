@@ -76,6 +76,7 @@ body {
   flex-wrap: wrap; /* Permet aux éléments de se réorganiser sur plusieurs lignes si nécessaire */
   justify-content: space-between; /* Pour espacer les cartes de manière égale sur la ligne */
   gap: 5px;
+  padding: 20px;
 }
 
 /* Style de base des cartes de recettes */
@@ -225,8 +226,6 @@ main {
   display: flex;
   gap: 40px;
 }
-
-
 
 
 
