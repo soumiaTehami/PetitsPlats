@@ -186,6 +186,7 @@ main {
 .dropdown-btn {
   background-color: #f9f9f9;
   color: #333;
+  border-radius: 11px;
   padding: 10px 15px;
   font-size: 16px;
   border: none;
@@ -213,15 +214,7 @@ main {
   border: 1px solid #ddd;
 }
 
-/* Style pour le chevron */
-.fa-chevron-down {
-  transition: transform 0.3s;
-}
 
-/* Style pour le chevron lorsque le bouton est ouvert */
-.fas fa-chevron-down {
-  transform: rotate(180deg);
-}
 .dropdowns{
   display: flex;
   gap: 40px;
@@ -231,34 +224,35 @@ main {
   display: inline-block;
 }
 
-.dropdown-content {
-  display: none; /* Caché par défaut */
+#ingredientsContent, #appareilsContent, #ustensilesContent {
+  padding: 10px;
+ 
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
   position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  display: none; /* Masquer par défaut */
 }
 
-.dropdown-content ul {
+ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
 }
 
-.dropdown-content ul li {
-  padding: 8px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-btn {
+li {
+  margin: 5px 0;
   cursor: pointer;
-  background-color: #f1f1f1;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
 }
+
+li:hover {
+  background-color: #f0f0f0;
+}
+.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
 
 
 

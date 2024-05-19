@@ -6,7 +6,7 @@ function afficherCartesRecettes(recipes) {
   }
 }
 // Appel de la fonction pour afficher les cartes de recettes
-//afficherCartesRecettes(recipes);
+afficherCartesRecettes(recipes);
 export function createRecipeCard(recipe) {
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('recipe-card');

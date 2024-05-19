@@ -1,42 +1,38 @@
 import { recipes } from '/data/recipes.js';
 
-function toggleDropdown(listId) {
-    let content = document.getElementById(listId);
+function toggleDropdown(contentId, chevronId) {
+    let content = document.getElementById(contentId);
+    let chevron = document.getElementById(chevronId);
     if (content) {
-        let chevron = content.parentElement.querySelector('.fa-chevron-down');
-        if (chevron) {
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-    
-            }
+        if (content.style.display === "block") {
+            content.style.display = "none";
+            chevron.classList.remove('rotate');
+        } else {
+            content.style.display = "block";
+            chevron.classList.add('rotate');
         }
     }
 }
 
-function normalizeIngredientName(name) {
-    // Normalise le nom de l'ingrédient en le mettant en minuscules et en supprimant les espaces inutiles
+function normalizeName(name) {
     return name.toLowerCase().trim();
 }
 
 function displayAllIngredients() {
     let ingredientsList = document.getElementById('ingredientsList');
     if (ingredientsList) {
-        ingredientsList.innerHTML = ''; // Efface la liste actuelle d'ingrédients
-        let seenIngredients = new Set(); // Création de l'ensemble pour suivre les ingrédients déjà rencontrés
+        ingredientsList.innerHTML = '';
+        let seenIngredients = new Set();
 
         for (let i = 0; i < recipes.length; i++) {
             let recipe = recipes[i];
             for (let j = 0; j < recipe.ingredients.length; j++) {
                 let ingredient = recipe.ingredients[j].ingredient;
-                let normalizedIngredient = normalizeIngredientName(ingredient);
+                let normalizedIngredient = normalizeName(ingredient);
                 if (!seenIngredients.has(normalizedIngredient)) {
                     let li = document.createElement('li');
                     li.textContent = ingredient;
                     ingredientsList.appendChild(li);
-
-                    // Ajoute l'ingrédient normalisé à l'ensemble des ingrédients rencontrés
                     seenIngredients.add(normalizedIngredient);
                 }
             }
@@ -44,36 +40,79 @@ function displayAllIngredients() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Placez ici le code qui doit être exécuté lorsque le DOM est complètement chargé
-    const dropdownButton = document.getElementById('dropdownButton');
-    dropdownButton.addEventListener('click', function() {
-        toggleDropdown('ingredientsList');
-        displayAllIngredients(); // Appel de la fonction pour afficher les ingrédients
-    });
+function getAllAppareils(recipes) {
+    let appareils = new Set();
 
-    // Appel de la fonction toggleDropdown pour cacher la liste au chargement de la page
-    toggleDropdown('ingredientsList');
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const dropdownButton = document.getElementById('dropdownButton');
-    const dropdownContent = document.getElementById('dropdownContent');
-
-    dropdownButton.addEventListener('click', function() {
-        if (dropdownContent.style.display === 'block') {
-            dropdownContent.style.display = 'none';
-        } else {
-            dropdownContent.style.display = 'block';
+    for (let i = 0; i < recipes.length; i++) {
+        let recipe = recipes[i];
+        let appareil = recipe.appliance;
+        if (appareil && appareil.trim() !== "") {
+            appareils.add(appareil.trim());
         }
+    }
+
+    return Array.from(appareils);
+}
+
+function displayAllAppareils() {
+    let appareilList = document.getElementById('appareilList');
+    if (appareilList) {
+        appareilList.innerHTML = '';
+        let appareils = getAllAppareils(recipes);
+
+        for (let i = 0; i < appareils.length; i++) {
+            let li = document.createElement('li');
+            li.textContent = appareils[i];
+            appareilList.appendChild(li);
+        }
+    }
+}
+
+function getAllUstensiles(recipes) {
+    let ustensiles = new Set();
+
+    for (let i = 0; i < recipes.length; i++) {
+        let recipe = recipes[i];
+        if (recipe.ustensils && recipe.ustensils.length > 0) {
+            for (let j = 0; j < recipe.ustensils.length; j++) {
+                let ustensile = recipe.ustensils[j];
+                if (ustensile && ustensile.trim() !== "") {
+                    ustensiles.add(ustensile.trim());
+                }
+            }
+        }
+    }
+
+    return Array.from(ustensiles);
+}
+
+function displayAllUstensiles() {
+    let ustensilesList = document.getElementById('ustensilesList');
+    if (ustensilesList) {
+        ustensilesList.innerHTML = '';
+        let ustensiles = getAllUstensiles(recipes);
+
+        for (let i = 0; i < ustensiles.length; i++) {
+            let li = document.createElement('li');
+            li.textContent = ustensiles[i];
+            ustensilesList.appendChild(li);
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('ingredientsButton').addEventListener('click', function() {
+        toggleDropdown('ingredientsContent', 'ingredientsChevron');
+        displayAllIngredients();
     });
 
-    // Exemple pour ajouter dynamiquement des ingrédients à la liste
-    const ingredients = [];
-    const ingredientsList = document.getElementById('ingredientsList');
+    document.getElementById('appareilsButton').addEventListener('click', function() {
+        toggleDropdown('appareilsContent', 'appareilsChevron');
+        displayAllAppareils();
+    });
 
-    ingredients.forEach(ingredient => {
-        const li = document.createElement('li');
-        li.textContent = ingredient;
-        ingredientsList.appendChild(li);
+    document.getElementById('ustensilesButton').addEventListener('click', function() {
+        toggleDropdown('ustensilesContent', 'ustensilesChevron');
+        displayAllUstensiles();
     });
 });
