@@ -21,48 +21,54 @@
     <div class="header-input-elements">
       <input type="text" class="header-input" placeholder="Rechercher une recette, un ingrédient, ..."
         id="searchInput" />
-        <span class="clear-search-btn">&times;</span>
-        <span class="fa-stack fa-2x " role="button" tabindex="0">
-          <span class="fa-solid fa-square fa-stack-2x"></span>
-          <span class="fa-solid fa-magnifying-glass fa-stack-1x"></span>
-        </span>
-        
+      <span class="clear-search-btn">&times;</span>
+      <span class="fa-stack fa-2x " role="button" tabindex="0">
+        <span class="fa-solid fa-square fa-stack-2x"></span>
+        <span class="fa-solid fa-magnifying-glass fa-stack-1x"></span>
+      </span>
+
     </div>
   </header>
   <main>
-    <div class="dropdowns">
-    <button class="dropdown-btn" id="ingredientsButton"><h3>Ingredients</h3>  <i class="fas fa-chevron-down" id="ingredientsChevron"></i></button>
-    
-    <div  id="ingredientsContent" >
-        <ul id="ingredientsList"></ul>
-    </div>
-  </div>
-  <div class="dropdowns">
-    <button class="dropdown-btn" id="appareilsButton"><h3>Appareils</h3><i class="fas fa-chevron-down" id="appareilsChevron"></i></button>
-    <div id="appareilsContent">
-        <ul id="appareilList"></ul>
-    </div>
-  </div>
-  <div class="dropdowns">
-    <button class="dropdown-btn" id="ustensilesButton"><h3>Ustensiles</h3>  <i class="fas fa-chevron-down" id="ustensilesChevron"></i>
-    </button>
-    <div id="ustensilesContent">
-        <ul id="ustensilesList"></ul>
-    </div>
-      </div>
-  </div>
-  </button>
-  <div class="dropdown-content" id="dropdownContent">
-      <ul id="utensilsList">
-          <!-- Les ingrédients seront ajoutés dynamiquement ici -->
-      </ul>
-  </div>
-</div>
+    <section class="dropdown-container">
+      <div class="dropdowns">
+        <button class="dropdown-btn" id="ingredientsButton">
+          <h3>Ingredients</h3> <i class="fas fa-chevron-down" id="ingredientsChevron"></i>
+        </button>
 
-  
-  
-  
-      
+        <div id="ingredientsContent">
+          <ul id="ingredientsList"></ul>
+        </div>
+      </div>
+      <div class="dropdowns">
+        <button class="dropdown-btn" id="appareilsButton">
+          <h3>Appareils</h3><i class="fas fa-chevron-down" id="appareilsChevron"></i>
+        </button>
+        <div id="appareilsContent">
+          <ul id="appareilList"></ul>
+        </div>
+      </div>
+      <div class="dropdowns">
+        <button class="dropdown-btn" id="ustensilesButton">
+          <h3>Ustensiles</h3> <i class="fas fa-chevron-down" id="ustensilesChevron"></i>
+        </button>
+        <div id="ustensilesContent">
+          <ul id="ustensilesList"></ul>
+        </div>
+      </div>
+      </div>
+      </button>
+      <div class="dropdown-content" id="dropdownContent">
+        <ul id="utensilsList">
+        </ul>
+      </div>
+      </div>
+    </section>
+
+
+
+
+
 
     <!-- Contenu principal -->
     <section id="recipeList">
