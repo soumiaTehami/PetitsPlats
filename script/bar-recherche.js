@@ -1,14 +1,22 @@
 import { recipes } from '/data/recipes.js';
-import {displayRecipeCardsWithForLoop,createRecipeCard} from './carte.js';
+import { displayRecipeCardsWithForLoop, createRecipeCard } from './carte.js';
+
 // Fonction de recherche de recettes
 function rechercherRecettes(term) {
-    // Filtrer les recettes qui correspondent au terme de recherche
-    return recipes.filter(recipe =>
-        recipe.name.toLowerCase().includes(term.toLowerCase()) ||
-        recipe.description.toLowerCase().includes(term.toLowerCase()) 
-        //recipe.ingredients.toLowerCase().includes(term.toLowerCase())
-    
-    );
+    const termLowerCase = term.toLowerCase();
+    const searchTerms = termLowerCase.split(' ');
+
+    return recipes.filter(recipe => {
+        const nameMatch = recipe.name.toLowerCase().includes(termLowerCase);
+        const descriptionMatch = recipe.description.toLowerCase().includes(termLowerCase);
+        const ingredientsMatch = searchTerms.every(searchTerm =>
+            recipe.ingredients.some(ingredient =>
+                typeof ingredient === 'string' && ingredient.toLowerCase().includes(searchTerm)
+            )
+        );
+
+        return nameMatch || descriptionMatch || ingredientsMatch;
+    });
 }
 
 // Fonction pour afficher les cartes de recettes filtrées
@@ -28,7 +36,7 @@ function afficherCartesRecettesFiltrees(term) {
 }
 
 // Appel initial pour afficher toutes les cartes de recettes
-//displayRecipeCardsWithForLoop(recipes);
+// displayRecipeCardsWithForLoop(recipes);
 
 // Ajouter un écouteur d'événement sur la barre de recherche
 const searchInput = document.getElementById("searchInput");
@@ -41,6 +49,7 @@ searchInput.addEventListener("input", function(event) {
         displayRecipeCardsWithForLoop(recipes);
     }
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     let searchInput = document.getElementById('searchInput');
     let clearSearchBtn = document.querySelector('.clear-search-btn');
@@ -55,6 +64,5 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.value = '';
         clearSearchBtn.style.display = 'none';
         displayRecipeCardsWithForLoop(recipes);
-
     });
 });

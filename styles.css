@@ -60,13 +60,12 @@ body {
   transform: translate(-50%, -50%);
   color: #fff; /* Couleur de l'icône de recherche */
 }
+
 .clear-search-btn {
-  position: relative;
-  right: 90px;
-  top:25px;
-  transform: translateY(-50%);
+  position: absolute;
+  right: 300px; /* Ajustez cette valeur selon vos besoins */
   cursor: pointer;
-  color:rgb(122, 122, 122);
+  color: rgb(122, 122, 122);
   font-size: 2.5rem; /* Taille de la police */
   display: none;
 }
@@ -187,7 +186,7 @@ main {
   background-color: #f9f9f9;
   color: #333;
   border-radius: 11px;
-  gap: 40px;
+  gap: 42.6px;
   padding: 10px 15px;
   font-size: 16px;
   border: none;
@@ -227,7 +226,7 @@ main {
 
 #ingredientsContent, #appareilsContent, #ustensilesContent {
   margin-top: -10px;
-  padding: 10px;
+  padding: 11px;
   border: 1px solid transparent;
   border-radius: 5px;
   background-color:#f9f9f9;;
@@ -258,5 +257,16 @@ li:hover {
   gap: 60px;
 }
 
+#search-Input {
+  width: 139.5px;
+  padding:10px 5px;
+  border: 1px solid #ccc;
 
+}
+
+#searchIcon {
+  margin-left: -30px; /* Pour placer l'icône à l'intérieur du champ de recherche */
+  cursor: pointer;
+  font-size: 12px;
+}
 
