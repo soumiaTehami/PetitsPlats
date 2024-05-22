@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Afficher le bouton "X" lorsque le champ de recherche a du texte
     searchInput.addEventListener('input', function() {
-        clearSearchBtn.style.display = this.value.length ? 'block' : 'none';
+        clearSearchBtn.style.display = this.value.length >= 1 ? 'block' : 'none';
     });
 
     // Effacer le contenu du champ de recherche lorsqu'on clique sur le bouton "X"

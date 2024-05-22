@@ -23,22 +23,40 @@ function displayAllIngredients() {
     if (ingredientsList) {
         ingredientsList.innerHTML = '';
         let seenIngredients = new Set();
-
+  // Boucle sur toutes les recettes
         for (let i = 0; i < recipes.length; i++) {
             let recipe = recipes[i];
+            // Boucle sur les ingrédients de chaque recette
             for (let j = 0; j < recipe.ingredients.length; j++) {
                 let ingredient = recipe.ingredients[j].ingredient;
+                 // Normalise le nom de l'ingrédient pour éviter les doublons
                 let normalizedIngredient = normalizeName(ingredient);
+                  // Si l'ingrédient n'a pas encore été vu, on l'ajoute à la liste
                 if (!seenIngredients.has(normalizedIngredient)) {
+                     // Crée un élément de liste HTML pour l'ingrédient
                     let li = document.createElement('li');
                     li.textContent = ingredient;
+                    li.classList.add('ingredient-tag');
+                    ingredientsList.appendChild(li);
+                    seenIngredients.add(normalizedIngredient);
+                    li.addEventListener('click', function() {
+                        addTag(ingredient);
+                    });
                     ingredientsList.appendChild(li);
                     seenIngredients.add(normalizedIngredient);
                 }
+                }
             }
         }
+        function addTag(ingredient) {
+            let tagsContainer = document.getElementById('tagsContainer');
+            let tag = document.createElement('div');
+            tag.textContent = ingredient;
+            tag.classList.add('selected-tag');
+            tagsContainer.appendChild(tag);
+        }
     }
-}
+
 
 function getAllAppareils(recipes) {
     let appareils = new Set();

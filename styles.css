@@ -214,12 +214,8 @@ main {
   border: 1px solid #ddd;
 }
 
-
-.dropdowns{
-  display: flex;
-  
-}
 .dropdowns {
+  display: flex;
   position: relative;
   display: inline-block;
 }
@@ -237,7 +233,7 @@ main {
 
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 15px;
 }
 
 li {
@@ -268,5 +264,24 @@ li:hover {
   margin-left: -30px; /* Pour placer l'icône à l'intérieur du champ de recherche */
   cursor: pointer;
   font-size: 12px;
+}
+.ingredient-tag {
+  display: inline-block;
+  border-radius: 12px;
+  padding: 5px 10px;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+#tagsContainer {
+  margin-top: 20px;
+}
+.selected-tag {
+  display: inline-block;
+  background-color: #ffd700;
+  border-radius: 12px;
+  padding: 5px 10px;
+  margin: 5px;
+  font-size: 14px;
 }
 
