@@ -50,11 +50,35 @@ function displayAllIngredients() {
         }
         function addTag(ingredient) {
             let tagsContainer = document.getElementById('tagsContainer');
+        
+            // Créer un conteneur pour le tag et le bouton de fermeture
             let tag = document.createElement('div');
-            tag.textContent = ingredient;
             tag.classList.add('selected-tag');
+        
+            // Ajouter le texte de l'ingrédient au tag
+            let tagText = document.createElement('span');
+            tagText.textContent = ingredient;
+        
+            // Créer le bouton de fermeture
+            let closeButton = document.createElement('button');
+            closeButton.textContent = 'X';
+            closeButton.classList.add('close-button');
+        
+            // Ajouter un écouteur d'événements pour le bouton de fermeture
+            closeButton.addEventListener('click', function() {
+                tagsContainer.removeChild(tag);
+            });
+        
+            // Ajouter le texte et le bouton de fermeture au tag
+            tag.appendChild(tagText);
+            tag.appendChild(closeButton);
+        
+            // Ajouter le tag au conteneur des tags
             tagsContainer.appendChild(tag);
         }
+        
+        
+        
     }
 
 
