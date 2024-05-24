@@ -1,4 +1,7 @@
 import { recipes } from '/data/recipes.js';
+import { createRecipeCard } from './carte.js';
+
+let selectedIngredients = new Set();
 
 function toggleDropdown(contentId, chevronId) {
     let content = document.getElementById(contentId);
@@ -18,22 +21,31 @@ function normalizeName(name) {
     return name.toLowerCase().trim();
 }
 
+
+
+function afficherCartesRecettesFiltrees() {
+    const recipeContainer = document.getElementById('recipeList');
+    recipeContainer.innerHTML = '';
+
+    const recipesFiltrees = rechercherRecettesParTags([...selectedIngredients]);
+
+    for (let i = 0; i < recipesFiltrees.length; i++) {
+        const card = createRecipeCard(recipesFiltrees[i]);
+        recipeContainer.appendChild(card);
+    }
+}
+
 function displayAllIngredients() {
     let ingredientsList = document.getElementById('ingredientsList');
     if (ingredientsList) {
         ingredientsList.innerHTML = '';
         let seenIngredients = new Set();
-  // Boucle sur toutes les recettes
         for (let i = 0; i < recipes.length; i++) {
             let recipe = recipes[i];
-            // Boucle sur les ingrédients de chaque recette
             for (let j = 0; j < recipe.ingredients.length; j++) {
                 let ingredient = recipe.ingredients[j].ingredient;
-                 // Normalise le nom de l'ingrédient pour éviter les doublons
                 let normalizedIngredient = normalizeName(ingredient);
-                  // Si l'ingrédient n'a pas encore été vu, on l'ajoute à la liste
                 if (!seenIngredients.has(normalizedIngredient)) {
-                     // Crée un élément de liste HTML pour l'ingrédient
                     let li = document.createElement('li');
                     li.textContent = ingredient;
                     li.classList.add('ingredient-tag');
@@ -42,45 +54,49 @@ function displayAllIngredients() {
                     li.addEventListener('click', function() {
                         addTag(ingredient);
                     });
-                    ingredientsList.appendChild(li);
-                    seenIngredients.add(normalizedIngredient);
-                }
                 }
             }
         }
-        function addTag(ingredient) {
-            let tagsContainer = document.getElementById('tagsContainer');
-        
-            // Créer un conteneur pour le tag et le bouton de fermeture
-            let tag = document.createElement('div');
-            tag.classList.add('selected-tag');
-        
-            // Ajouter le texte de l'ingrédient au tag
-            let tagText = document.createElement('span');
-            tagText.textContent = ingredient;
-        
-            // Créer le bouton de fermeture
-            let closeButton = document.createElement('button');
-            closeButton.textContent = 'X';
-            closeButton.classList.add('close-button');
-        
-            // Ajouter un écouteur d'événements pour le bouton de fermeture
-            closeButton.addEventListener('click', function() {
-                tagsContainer.removeChild(tag);
-            });
-        
-            // Ajouter le texte et le bouton de fermeture au tag
-            tag.appendChild(tagText);
-            tag.appendChild(closeButton);
-        
-            // Ajouter le tag au conteneur des tags
-            tagsContainer.appendChild(tag);
-        }
-        
-        
-        
+    }
+}
+
+function addTag(ingredient) {
+    if (selectedIngredients.has(ingredient)) {
+        return; // Ne pas ajouter de doublons
     }
 
+    let tagsContainer = document.getElementById('tagsContainer');
+    
+    let tag = document.createElement('div');
+    tag.classList.add('selected-tag');
+    
+    let tagText = document.createElement('span');
+    tagText.textContent = ingredient;
+    
+    let closeButton = document.createElement('button');
+    closeButton.textContent = 'X';
+    closeButton.classList.add('close-button');
+    
+    closeButton.addEventListener('click', function() {
+        tagsContainer.removeChild(tag);
+        selectedIngredients.delete(ingredient);
+        afficherCartesRecettesFiltrees();
+    });
+    
+    tag.appendChild(tagText);
+    tag.appendChild(closeButton);
+    
+    tagsContainer.appendChild(tag);
+    
+    selectedIngredients.add(ingredient);
+    afficherCartesRecettesFiltrees();
+}
+
+function rechercherRecettesParTags(tags) {
+    return recipes.filter(recipe => {
+        return tags.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient === tag));
+    });
+}
 
 function getAllAppareils(recipes) {
     let appareils = new Set();
@@ -105,6 +121,7 @@ function displayAllAppareils() {
         for (let i = 0; i < appareils.length; i++) {
             let li = document.createElement('li');
             li.textContent = appareils[i];
+            li.classList.add('appareil-tag');
             appareilList.appendChild(li);
         }
     }
@@ -137,6 +154,7 @@ function displayAllUstensiles() {
         for (let i = 0; i < ustensiles.length; i++) {
             let li = document.createElement('li');
             li.textContent = ustensiles[i];
+            li.classList.add('ustensile-tag');
             ustensilesList.appendChild(li);
         }
     }

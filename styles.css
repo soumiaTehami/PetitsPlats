@@ -186,7 +186,7 @@ main {
   background-color: #f9f9f9;
   color: #333;
   border-radius: 11px;
-  gap: 42.6px;
+  gap: 30px;
   padding: 10px 15px;
   font-size: 16px;
   border: none;
@@ -196,6 +196,7 @@ main {
   align-items: center; /* Centre les éléments verticalement */
   text-align: center;
   outline: none;
+  width: 170px;
 }
 
 .dropdown-btn div {
@@ -231,7 +232,7 @@ main {
   display: none; /* Masquer par défaut */
   top: 86px;
   height: 315px;
-  width:160px ;
+  width:150px ;
 }
 
 ul {
@@ -245,7 +246,7 @@ li {
 }
 
 li:hover {
-  background-color: #f0f0f0;
+  background-color:#ffd15b;;
 }
 .rotate {
   transform: rotate(180deg);
@@ -285,10 +286,10 @@ li:hover {
 .selected-tag {
   padding: 5px 10px;
   display: inline-flex;
-    align-items:end;
+  justify-content: end;
     gap: 60px;
     border-radius: 10px;
-    background: #FFD15B;
+    background:#ffd15b;;
     color: #000;
     font-family: Manrope;
     font-size: 14px;

@@ -20,7 +20,7 @@ function rechercherRecettes(term) {
 }
 
 // Fonction pour afficher les cartes de recettes filtrées
-function afficherCartesRecettesFiltrees(term) {
+ function afficherCartesRecettesFiltrees(term) {
     // Supprimer les anciennes cartes de recettes
     const recipeContainer = document.getElementById('recipeList');
     recipeContainer.innerHTML = '';
