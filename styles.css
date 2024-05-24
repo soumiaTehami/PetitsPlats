@@ -92,7 +92,7 @@ body {
 .recipe-card  {
   border-radius: 5px;
     box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .1);
-    height: 645px;
+    height: 700px;
     width: 380px;
     padding: 0px;
     background-color: #fff;
@@ -222,7 +222,7 @@ main {
 }
 
 #ingredientsContent, #appareilsContent, #ustensilesContent {
-  margin-top: -10px;
+  margin-top: -16px;
   padding: 11px;
   border: 1px solid transparent;
   border-radius: 5px;
@@ -232,7 +232,7 @@ main {
   display: none; /* Masquer par défaut */
   top: 86px;
   height: 315px;
-  width:150px ;
+  width:px ;
 }
 
 ul {
@@ -269,7 +269,7 @@ li:hover {
   cursor: pointer;
   font-size: 12px;
 }
-.ingredient-tag {
+.ingredient-tag, .appareil-tag, .ustensile-tag, .selected-tag  {
   display: inline-block;
   border-radius: 12px;
   padding: 5px 10px;
