@@ -183,19 +183,22 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('ingredientsButton').addEventListener('click', function() {
         toggleDropdown('ingredientsContent', 'ingredientsChevron');
         displayAllIngredients();
+        updateRecipeCount()
     });
 
     document.getElementById('appareilsButton').addEventListener('click', function() {
         toggleDropdown('appareilsContent', 'appareilsChevron');
         displayAllAppareils();
+        updateRecipeCount()
     });
 
     document.getElementById('ustensilesButton').addEventListener('click', function() {
         toggleDropdown('ustensilesContent', 'ustensilesChevron');
         displayAllUstensiles();
+        updateRecipeCount()
     });
 });
-function updateRecipeCount() {
+ export function updateRecipeCount() {
     // Select the element that will display the number of recipes
     const recipesNumberElement = document.querySelector('.recipesNumber');
   

@@ -1,5 +1,6 @@
 import { recipes } from '/data/recipes.js';
 import { displayRecipeCardsWithForLoop, createRecipeCard } from './carte.js';
+import { updateRecipeCount } from './dropdown.js';
 
 // Fonction de recherche de recettes
 function rechercherRecettes(term) {
@@ -44,6 +45,7 @@ searchInput.addEventListener("input", function(event) {
     const searchTerm = event.target.value.trim();
     if (searchTerm.length >= 3) {
         afficherCartesRecettesFiltrees(searchTerm);
+        updateRecipeCount();
     } else {
         // Si le terme de recherche est trop court, afficher toutes les recettes
         displayRecipeCardsWithForLoop(recipes);
