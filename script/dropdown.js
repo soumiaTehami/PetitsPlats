@@ -195,3 +195,25 @@ document.addEventListener("DOMContentLoaded", function() {
         displayAllUstensiles();
     });
 });
+function updateRecipeCount() {
+    // Select the element that will display the number of recipes
+    const recipesNumberElement = document.querySelector('.recipesNumber');
+  
+    // Select all .recipe-card elements
+    const allRecipes = document.querySelectorAll('.recipe-card');
+  
+    // Update the .recipesNumber element with the number of recipes
+    if (allRecipes.length === 0) {
+      recipesNumberElement.textContent = '0 recette';
+    } else if (allRecipes.length === 1) {
+      recipesNumberElement.textContent = '1 recette';
+    } else {
+      recipesNumberElement.textContent = allRecipes.length + ' recettes';
+    }
+  }
+  
+  // Run the updateRecipeCount function when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    updateRecipeCount();
+  });
+  
