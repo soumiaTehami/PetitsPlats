@@ -310,3 +310,8 @@ li:hover {
 .close-button:hover {
   color:#000;;
 }
+.container{
+  display: flex;
+  justify-content:space-between;
+
+}

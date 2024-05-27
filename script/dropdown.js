@@ -33,6 +33,7 @@ function afficherCartesRecettesFiltrees() {
         const card = createRecipeCard(recipesFiltrees[i]);
         recipeContainer.appendChild(card);
     }
+    updateRecipeCount();
 }
 
 function displayAllIngredients() {
@@ -135,6 +136,7 @@ function addTag(item, type) {
     
     selectedSet.add(item);
     afficherCartesRecettesFiltrees();
+  
 }
 
 function rechercherRecettesParTags(ingredients, appareils, ustensiles) {
@@ -183,19 +185,19 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('ingredientsButton').addEventListener('click', function() {
         toggleDropdown('ingredientsContent', 'ingredientsChevron');
         displayAllIngredients();
-        updateRecipeCount()
+        updateRecipeCount();
     });
 
     document.getElementById('appareilsButton').addEventListener('click', function() {
         toggleDropdown('appareilsContent', 'appareilsChevron');
         displayAllAppareils();
-        updateRecipeCount()
+        updateRecipeCount();
     });
 
     document.getElementById('ustensilesButton').addEventListener('click', function() {
         toggleDropdown('ustensilesContent', 'ustensilesChevron');
         displayAllUstensiles();
-        updateRecipeCount()
+        updateRecipeCount();
     });
 });
  export function updateRecipeCount() {

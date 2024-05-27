@@ -1,4 +1,5 @@
 import { recipes } from '/data/recipes.js';
+import { updateRecipeCount } from './dropdown.js';
 function afficherCartesRecettes(recipes) {
   for (let i = 0; i < recipes.length; i++) {
       const recipe = recipes[i];
@@ -93,10 +94,12 @@ return cardContainer;
 // Fonction pour afficher les cartes de recette avec une boucle for
  export function displayRecipeCardsWithForLoop(recipes) {
     const recipeContainer = document.getElementById('recipeList');
+    recipeContainer.innerHTML = ''; // Effacer toutes les cartes
     for (let i = 0; i < recipes.length; i++) {
         const card = createRecipeCard(recipes[i]);
         recipeContainer.appendChild(card);
     }
+    updateRecipeCount();
 }
 
 // Appel de la fonction pour afficher les cartes de recette
