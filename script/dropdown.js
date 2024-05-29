@@ -111,8 +111,8 @@ function addTag(item, type) {
         return; // Ne pas ajouter de doublons
     }
 
-    let tagsContainer = document.getElementById('tagsContainer');
-    
+    let tagsContainer = document.getElementById('tagsContainer-'+type);
+    console.log(tagsContainer);
     let tag = document.createElement('div');
     tag.classList.add('selected-tag');
     
@@ -140,8 +140,12 @@ function addTag(item, type) {
 }
 
 function rechercherRecettesParTags(ingredients, appareils, ustensiles) {
+    // Utilise la méthode filter pour parcourir chaque recette dans la liste des recettes
     return recipes.filter(recipe => {
+            // Vérifie si tous les ingrédients donnés (tags) sont présents dans la recette
         let matchIngredients = ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient === tag));
+        // Vérifie si chaque ingrédient de la recette correspond à un tag d'ingrédient donné
+        // Si la liste des appareils est vide, cela signifie qu'il n'y a pas de filtre sur les appareils
         let matchAppareils = appareils.length === 0 || appareils.includes(recipe.appliance);
         let matchUstensiles = ustensiles.every(tag => recipe.ustensils.includes(tag));
 

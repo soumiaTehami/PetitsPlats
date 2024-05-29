@@ -233,15 +233,15 @@ main {
   top: 86px;
   height: 315px;
   width: 177px;
-  overflow: hidden; /* Masquer les barres de défilement */
+  overflow-y:scroll ;
+  scrollbar-width: 2px ;
+  scrollbar-color: white;
+ 
+
 }
 
-#ingredientsContent::before, #appareilsContent::before, #ustensilesContent::before {
-  display: block;
-  height: 100%;
-  overflow: auto; /* Activer le défilement interne */
-  padding-right: 17px; /* Compensez la largeur de la barre de défilement pour éviter le rognage du contenu */
-}
+-webkit-scrollbar-track {
+  fond : transparent ;}
 
 
 
