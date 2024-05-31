@@ -84,30 +84,70 @@ function displayAllIngredients(filter = '') {
 
 
 // Événement d'entrée sur le champ de recherche
-document.getElementById('search-Input').addEventListener('input', function() {
-    let filter = this.value;
-    console.log('Input event fired. Filter:', filter);
-    displayAllIngredients(filter);
-});
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('search-Input').addEventListener('input', function() {
+        let filter = this.value;
+        console.log('Input event fired. Filter:', filter);
+        displayAllIngredients(filter);
+       
+    });
+    
 
-// Événement de clic sur l'icône de recherche
-document.getElementById('searchIcon').addEventListener('click', function() {
-    let filter = document.getElementById('searchInput').value;
-    console.log('Click event fired. Filter:', filter);
-    displayAllIngredients(filter);
+    document.getElementById('searchIcon').addEventListener('click', function() {
+        let filter = document.getElementById('search-Input').value;
+        console.log('Click event fired. Filter:', filter);
+        displayAllIngredients(filter);
+       
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('search--Input').addEventListener('input', function() {
+        let filter = this.value;
+        console.log('Input event fired. Filter:', filter);
+        displayAllAppareils(filter);
+       
+    });
+    
+
+    document.getElementById('searchIcon').addEventListener('click', function() {
+        let filter = document.getElementById('search--Input').value;
+        console.log('Click event fired. Filter:', filter);
+        displayAllAppareils(filter);
+       
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('search---Input').addEventListener('input', function() {
+        let filter = this.value;
+        console.log('Input event fired. Filter:', filter);
+        displayAllAppareils(filter);
+       
+    });
+    
+
+    document.getElementById('searchIcon').addEventListener('click', function() {
+        let filter = document.getElementById('search---Input').value;
+        console.log('Click event fired. Filter:', filter);
+        displayAllUstensiles(filter);
+       
+    });
 });
 
 // Initial display
 displayAllIngredients();
+displayAllAppareils();
+displayAllUstensiles();
 
-// Initial display
-displayAllIngredients();
 
-function displayAllAppareils() {
+
+function displayAllAppareils(filter = '') {
     let appareilList = document.getElementById('appareilList');
     if (appareilList) {
         appareilList.innerHTML = '';
         let appareils = getAllAppareils(recipes);
+        let filterNormalized = normalizeName(filter);
+
+        appareils = appareils.filter(appareil => normalizeName(appareil).includes(filterNormalized));
 
         for (let i = 0; i < appareils.length; i++) {
             let li = document.createElement('li');
@@ -118,14 +158,24 @@ function displayAllAppareils() {
                 addTag(appareils[i], 'appareil');
             });
         }
+
+        if (appareilList.innerHTML === '') {
+            let noMatchMessage = document.createElement('li');
+            noMatchMessage.textContent = 'Aucun appareil correspondant trouvé.';
+            noMatchMessage.classList.add('no-match-message');
+            appareilList.appendChild(noMatchMessage);
+        }
     }
 }
 
-function displayAllUstensiles() {
+function displayAllUstensiles(filter = '') {
     let ustensilesList = document.getElementById('ustensilesList');
     if (ustensilesList) {
         ustensilesList.innerHTML = '';
         let ustensiles = getAllUstensiles(recipes);
+        let filterNormalized = normalizeName(filter);
+
+        ustensiles = ustensiles.filter(ustensile => normalizeName(ustensile).includes(filterNormalized));
 
         for (let i = 0; i < ustensiles.length; i++) {
             let li = document.createElement('li');
@@ -135,6 +185,13 @@ function displayAllUstensiles() {
             li.addEventListener('click', function() {
                 addTag(ustensiles[i], 'ustensile');
             });
+        }
+
+        if (ustensilesList.innerHTML === '') {
+            let noMatchMessage = document.createElement('li');
+            noMatchMessage.textContent = 'Aucun ustensile correspondant trouvé.';
+            noMatchMessage.classList.add('no-match-message');
+            ustensilesList.appendChild(noMatchMessage);
         }
     }
 }
@@ -182,10 +239,7 @@ function addTag(item, type) {
     console.log(`Tag ajouté: ${item}, Type: ${type}`);
 }
 
-document.getElementById('searchInput').addEventListener('input', function() {
-    let filter = this.value;
-    displayAllIngredients(filter);
-});
+
 
 
 function rechercherRecettesParTags(ingredients, appareils, ustensiles) {
