@@ -1,5 +1,5 @@
 import { recipes } from '/data/recipes.js';
-import { updateRecipeCount } from './dropdown.js';
+import { updateRecipeCount } from './updaterecette.js';
 function afficherCartesRecettes(recipes) {
   for (let i = 0; i < recipes.length; i++) {
       const recipe = recipes[i];

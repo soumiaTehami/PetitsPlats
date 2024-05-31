@@ -267,7 +267,7 @@ li:hover {
   gap: 60px;
 }
 
-#search-Input {
+#search-Input,#search--Input,#search---Input {
   width: 139.5px;
   padding:10px 5px;
   border: 1px solid #ccc;

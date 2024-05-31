@@ -1,5 +1,9 @@
 import { recipes } from '/data/recipes.js';
 import { createRecipeCard } from './carte.js';
+import{displayAllIngredients} from './Ingredients.js'
+import{displayAllAppareils} from './Appareils.js'
+import {displayAllUstensiles} from './Ustensiles.js';
+import{updateRecipeCount}from'./updaterecette.js';
 
 let selectedIngredients = new Set();
 let selectedAppareils = new Set();
@@ -36,169 +40,12 @@ function afficherCartesRecettesFiltrees() {
 
 
 // Normalisation des noms pour comparaison insensible à la casse et aux accents
-function normalizeName(name) {
+export function normalizeName(name) {
     console.log('Normalizing name:', name);
     return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
-
-// Affichage des ingrédients filtrés
-function displayAllIngredients(filter = '') {
-    console.log('Displaying ingredients with filter:', filter);
-    let ingredientsList = document.getElementById('ingredientsList');
-    if (ingredientsList) {
-        ingredientsList.innerHTML = '';
-        let seenIngredients = new Set();
-        let filterNormalized = normalizeName(filter);
-
-        if (Array.isArray(recipes)) {
-            for (let i = 0; i < recipes.length; i++) {
-                let recipe = recipes[i];
-                for (let j = 0; j < recipe.ingredients.length; j++) {
-                    let ingredient = recipe.ingredients[j].ingredient;
-                    let normalizedIngredient = normalizeName(ingredient);
-                    if (!seenIngredients.has(normalizedIngredient) && normalizedIngredient.includes(filterNormalized)) {
-                        let li = document.createElement('li');
-                        li.textContent = ingredient;
-                        li.classList.add('ingredient-tag');
-                        ingredientsList.appendChild(li);
-                        seenIngredients.add(normalizedIngredient);
-                        li.addEventListener('click', function() {
-                            addTag(ingredient, 'ingredient');
-                        });
-                    }
-                }
-            }
-        }
-
-        if (ingredientsList.innerHTML === '') {
-            let noMatchMessage = document.createElement('li');
-            noMatchMessage.textContent = 'Aucun ingrédient correspondant trouvé.';
-            noMatchMessage.classList.add('no-match-message');
-            ingredientsList.appendChild(noMatchMessage);
-        }
-    } else {
-        console.error('Element ingredientsList not found.');
-    }
-}
-
-
-
-// Événement d'entrée sur le champ de recherche
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('search-Input').addEventListener('input', function() {
-        let filter = this.value;
-        console.log('Input event fired. Filter:', filter);
-        displayAllIngredients(filter);
-       
-    });
     
-
-    document.getElementById('searchIcon').addEventListener('click', function() {
-        let filter = document.getElementById('search-Input').value;
-        console.log('Click event fired. Filter:', filter);
-        displayAllIngredients(filter);
-       
-    });
-});
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('search--Input').addEventListener('input', function() {
-        let filter = this.value;
-        console.log('Input event fired. Filter:', filter);
-        displayAllAppareils(filter);
-       
-    });
-    
-
-    document.getElementById('searchIcon').addEventListener('click', function() {
-        let filter = document.getElementById('search--Input').value;
-        console.log('Click event fired. Filter:', filter);
-        displayAllAppareils(filter);
-       
-    });
-});
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('search---Input').addEventListener('input', function() {
-        let filter = this.value;
-        console.log('Input event fired. Filter:', filter);
-        displayAllAppareils(filter);
-       
-    });
-    
-
-    document.getElementById('searchIcon').addEventListener('click', function() {
-        let filter = document.getElementById('search---Input').value;
-        console.log('Click event fired. Filter:', filter);
-        displayAllUstensiles(filter);
-       
-    });
-});
-
-// Initial display
-displayAllIngredients();
-displayAllAppareils();
-displayAllUstensiles();
-
-
-
-function displayAllAppareils(filter = '') {
-    let appareilList = document.getElementById('appareilList');
-    if (appareilList) {
-        appareilList.innerHTML = '';
-        let appareils = getAllAppareils(recipes);
-        let filterNormalized = normalizeName(filter);
-
-        appareils = appareils.filter(appareil => normalizeName(appareil).includes(filterNormalized));
-
-        for (let i = 0; i < appareils.length; i++) {
-            let li = document.createElement('li');
-            li.textContent = appareils[i];
-            li.classList.add('appareil-tag');
-            appareilList.appendChild(li);
-            li.addEventListener('click', function() {
-                addTag(appareils[i], 'appareil');
-            });
-        }
-
-        if (appareilList.innerHTML === '') {
-            let noMatchMessage = document.createElement('li');
-            noMatchMessage.textContent = 'Aucun appareil correspondant trouvé.';
-            noMatchMessage.classList.add('no-match-message');
-            appareilList.appendChild(noMatchMessage);
-        }
-    }
-}
-
-function displayAllUstensiles(filter = '') {
-    let ustensilesList = document.getElementById('ustensilesList');
-    if (ustensilesList) {
-        ustensilesList.innerHTML = '';
-        let ustensiles = getAllUstensiles(recipes);
-        let filterNormalized = normalizeName(filter);
-
-        ustensiles = ustensiles.filter(ustensile => normalizeName(ustensile).includes(filterNormalized));
-
-        for (let i = 0; i < ustensiles.length; i++) {
-            let li = document.createElement('li');
-            li.textContent = ustensiles[i];
-            li.classList.add('ustensile-tag');
-            ustensilesList.appendChild(li);
-            li.addEventListener('click', function() {
-                addTag(ustensiles[i], 'ustensile');
-            });
-        }
-
-        if (ustensilesList.innerHTML === '') {
-            let noMatchMessage = document.createElement('li');
-            noMatchMessage.textContent = 'Aucun ustensile correspondant trouvé.';
-            noMatchMessage.classList.add('no-match-message');
-            ustensilesList.appendChild(noMatchMessage);
-        }
-    }
-}
-
-
-    
-function addTag(item, type) {
+export function addTag(item, type) {
     let selectedSet;
     if (type === 'ingredient') {
         selectedSet = selectedIngredients;
@@ -256,37 +103,9 @@ function rechercherRecettesParTags(ingredients, appareils, ustensiles) {
     });
 }
 
-function getAllAppareils(recipes) {
-    let appareils = new Set();
 
-    for (let i = 0; i < recipes.length; i++) {
-        let recipe = recipes[i];
-        let appareil = recipe.appliance;
-        if (appareil && appareil.trim() !== "") {
-            appareils.add(appareil.trim());
-        }
-    }
 
-    return Array.from(appareils);
-}
 
-function getAllUstensiles(recipes) {
-    let ustensiles = new Set();
-
-    for (let i = 0; i < recipes.length; i++) {
-        let recipe = recipes[i];
-        if (recipe.ustensils && recipe.ustensils.length > 0) {
-            for (let j = 0; j < recipe.ustensils.length; j++) {
-                let ustensile = recipe.ustensils[j];
-                if (ustensile && ustensile.trim() !== "") {
-                    ustensiles.add(ustensile.trim());
-                }
-            }
-        }
-    }
-
-    return Array.from(ustensiles);
-}
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('ingredientsButton').addEventListener('click', function() {
@@ -307,30 +126,5 @@ document.addEventListener("DOMContentLoaded", function() {
         updateRecipeCount();
     });
 });
- export function updateRecipeCount() {
-    // Select the element that will display the number of recipes
-    const recipesNumberElement = document.querySelector('.recipesNumber');
-    
-    // Select all .recipe-card elements
-    const allRecipes = document.querySelectorAll('.recipe-card');
-    const recipeContainer = document.getElementById('recipeList');
-    // Get the search input value
-  const searchInput = document.querySelector('#searchInput'); // Assuming there's an input with this ID
-  const searchTerm = searchInput ? searchInput.value : 'XXX';
-  
-    // Update the .recipesNumber element with the number of recipes
-    if (allRecipes.length === 0) {
-        recipesNumberElement.textContent = ''; // Clear the previous count message if no recipes are found
-        recipeContainer.innerHTML = `<p>Aucune recette ne contient ‘${searchTerm}’, vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
-      } else if (allRecipes.length === 1) {
-      recipesNumberElement.textContent = '1 recette';
-    } else {
-      recipesNumberElement.textContent = allRecipes.length + ' recettes';
-    }
-  }
-  
-  // Run the updateRecipeCount function when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    updateRecipeCount();
-  });
+ 
   
