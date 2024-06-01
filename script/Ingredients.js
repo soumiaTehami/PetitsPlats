@@ -1,5 +1,7 @@
-import {normalizeName,addTag} from './dropdown.js'
+
+import { normalizeName, addTag } from './dropdown.js';
 import { recipes } from '/data/recipes.js';
+
 // Affichage des ingrédients filtrés
 export function displayAllIngredients(filter = '') {
     console.log('Displaying ingredients with filter:', filter);
@@ -39,20 +41,31 @@ export function displayAllIngredients(filter = '') {
         console.error('Element ingredientsList not found.');
     }
 }
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('search-Input').addEventListener('input', function() {
+    const searchInput = document.getElementById('search-Input');
+    const clearSearch = document.querySelector('.clear-search');
+    const searchIcon = document.getElementById('searchIcon');
+
+    searchInput.addEventListener('input', function() {
         let filter = this.value;
+        clearSearch.style.display = this.value.length >= 1 ? 'block' : 'none';
         console.log('Input event fired. Filter:', filter);
         displayAllIngredients(filter);
-       
     });
-    
 
-    document.getElementById('searchIcon').addEventListener('click', function() {
-        let filter = document.getElementById('search-Input').value;
+    clearSearch.addEventListener('click', function() {
+        searchInput.value = '';
+        clearSearch.style.display = 'none';
+        console.log('Clear search button clicked.');
+        displayAllIngredients('');
+    });
+
+    searchIcon.addEventListener('click', function() {
+        let filter = searchInput.value;
         console.log('Click event fired. Filter:', filter);
         displayAllIngredients(filter);
-       
     });
 });
+
 displayAllIngredients();

@@ -1,9 +1,10 @@
 import { recipes } from '/data/recipes.js';
-import { createRecipeCard } from './carte.js';
-import{displayAllIngredients} from './Ingredients.js'
-import{displayAllAppareils} from './Appareils.js'
-import {displayAllUstensiles} from './Ustensiles.js';
-import{updateRecipeCount}from'./updaterecette.js';
+import { displayAllIngredients } from './Ingredients.js';
+import { displayAllAppareils } from './Appareils.js';
+import { displayAllUstensiles } from './Ustensiles.js';
+import { updateRecipeCount } from './updaterecette.js';
+import { displayRecipeCardsWithForLoop, createRecipeCard } from './carte.js';
+import{afficherCartesRecettes} from './bar-recherche.js'
 
 let selectedIngredients = new Set();
 let selectedAppareils = new Set();
@@ -23,8 +24,6 @@ function toggleDropdown(contentId, chevronId) {
     }
 }
 
-
-
 function afficherCartesRecettesFiltrees() {
     const recipeContainer = document.getElementById('recipeList');
     recipeContainer.innerHTML = '';
@@ -38,13 +37,12 @@ function afficherCartesRecettesFiltrees() {
     updateRecipeCount();
 }
 
-
 // Normalisation des noms pour comparaison insensible à la casse et aux accents
 export function normalizeName(name) {
     console.log('Normalizing name:', name);
     return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
-    
+
 export function addTag(item, type) {
     let selectedSet;
     if (type === 'ingredient') {
@@ -86,24 +84,15 @@ export function addTag(item, type) {
     console.log(`Tag ajouté: ${item}, Type: ${type}`);
 }
 
-
-
-
 function rechercherRecettesParTags(ingredients, appareils, ustensiles) {
-    // Utilise la méthode filter pour parcourir chaque recette dans la liste des recettes
     return recipes.filter(recipe => {
-            // Vérifie si tous les ingrédients donnés (tags) sont présents dans la recette
         let matchIngredients = ingredients.every(tag => recipe.ingredients.some(ingredient => ingredient.ingredient === tag));
-        // Vérifie si chaque ingrédient de la recette correspond à un tag d'ingrédient donné
-        // Si la liste des appareils est vide, cela signifie qu'il n'y a pas de filtre sur les appareils
         let matchAppareils = appareils.length === 0 || appareils.includes(recipe.appliance);
         let matchUstensiles = ustensiles.every(tag => recipe.ustensils.includes(tag));
 
         return matchIngredients && matchAppareils && matchUstensiles;
     });
 }
-
-
 
 
 
@@ -125,6 +114,30 @@ document.addEventListener("DOMContentLoaded", function() {
         displayAllUstensiles();
         updateRecipeCount();
     });
+
+    let searchInput = document.getElementById('searchInput');
+    let clearSearchBtn = document.querySelector('.clear-search-btn');
+
+    searchInput.addEventListener('input', function(event) {
+        const searchTerm = event.target.value.trim();
+        clearSearchBtn.style.display = this.value.length >= 1 ? 'block' : 'none';
+
+        if (searchTerm.length >= 3) {
+            afficherCartesRecettes(searchTerm);
+        } else {
+            displayRecipeCardsWithForLoop(recipes);
+        }
+        updateRecipeCount();
+    });
+
+    clearSearchBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        clearSearchBtn.style.display = 'none';
+        displayRecipeCardsWithForLoop(recipes);
+        updateRecipeCount();
+    });
 });
- 
-  
+
+// Appel initial pour afficher toutes les cartes de recettes
+displayRecipeCardsWithForLoop(recipes);
+updateRecipeCount();
