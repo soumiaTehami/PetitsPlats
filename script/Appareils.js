@@ -1,5 +1,6 @@
-import {normalizeName,addTag} from './dropdown.js'
+import { normalizeName, addTag } from './dropdown.js';
 import { recipes } from '/data/recipes.js';
+
 export function displayAllAppareils(filter = '') {
     let appareilList = document.getElementById('appareilList');
     if (appareilList) {
@@ -27,22 +28,33 @@ export function displayAllAppareils(filter = '') {
         }
     }
 }
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('search--Input').addEventListener('input', function() {
+    const searchInput = document.getElementById('search--Input');
+    const clearSearch = document.querySelector('.clearsearch');
+    const searchIcon = document.getElementById('searchIcon');
+
+    searchInput.addEventListener('input', function() {
         let filter = this.value;
+        clearSearch.style.display = this.value.length >= 1 ? 'block' : 'none';
         console.log('Input event fired. Filter:', filter);
         displayAllAppareils(filter);
-       
     });
-    
 
-    document.getElementById('searchIcon').addEventListener('click', function() {
-        let filter = document.getElementById('search--Input').value;
+    clearSearch.addEventListener('click', function() {
+        searchInput.value = '';
+        clearSearch.style.display = 'none';
+        console.log('Clear search button clicked.');
+        displayAllAppareils('');
+    });
+
+    searchIcon.addEventListener('click', function() {
+        let filter = searchInput.value;
         console.log('Click event fired. Filter:', filter);
         displayAllAppareils(filter);
-       
     });
 });
+
 function getAllAppareils(recipes) {
     let appareils = new Set();
 
@@ -56,4 +68,5 @@ function getAllAppareils(recipes) {
 
     return Array.from(appareils);
 }
+
 displayAllAppareils();

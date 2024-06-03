@@ -1,5 +1,6 @@
-import {normalizeName,addTag} from './dropdown.js'
+import { normalizeName, addTag } from './dropdown.js';
 import { recipes } from '/data/recipes.js';
+
 export function displayAllUstensiles(filter = '') {
     let ustensilesList = document.getElementById('ustensilesList');
     if (ustensilesList) {
@@ -27,6 +28,7 @@ export function displayAllUstensiles(filter = '') {
         }
     }
 }
+
 function getAllUstensiles(recipes) {
     let ustensiles = new Set();
 
@@ -44,20 +46,31 @@ function getAllUstensiles(recipes) {
 
     return Array.from(ustensiles);
 }
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('search---Input').addEventListener('input', function() {
+    const searchInput = document.getElementById('search---Input');
+    const clearSearchBtn = document.querySelector('.clearsearch-btn');
+    const searchIcon = document.getElementById('searchIcon');
+
+    searchInput.addEventListener('input', function() {
         let filter = this.value;
+        clearSearchBtn.style.display = this.value.length >= 1 ? 'block' : 'none';
         console.log('Input event fired. Filter:', filter);
         displayAllUstensiles(filter);
-       
     });
-    
 
-    document.getElementById('searchIcon').addEventListener('click', function() {
-        let filter = document.getElementById('search---Input').value;
+    clearSearchBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        clearSearchBtn.style.display = 'none';
+        console.log('Clear search button clicked.');
+        displayAllUstensiles('');
+    });
+
+    searchIcon.addEventListener('click', function() {
+        let filter = searchInput.value;
         console.log('Click event fired. Filter:', filter);
         displayAllUstensiles(filter);
-       
     });
 });
+
 displayAllUstensiles();
