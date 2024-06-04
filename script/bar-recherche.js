@@ -8,7 +8,6 @@ export function rechercherRecettes(term) {
         const nameMatch = recipe.name.toLowerCase().includes(termLowerCase);
         const descriptionMatch = recipe.description.toLowerCase().includes(termLowerCase);
 
-        // Check if the entire search term matches any ingredient as a whole phrase
         const phraseMatch = recipe.ingredients.some(ingredient =>
             typeof ingredient === 'string' && ingredient.toLowerCase().includes(termLowerCase)
         );
