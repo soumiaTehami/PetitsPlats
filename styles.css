@@ -91,7 +91,7 @@ body {
   flex-wrap: wrap; /* Permet aux éléments de se réorganiser sur plusieurs lignes si nécessaire */
   justify-content: space-between; /* Pour espacer les cartes de manière égale sur la ligne */
   gap: 5px;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 /* Style de base des cartes de recettes */
@@ -239,7 +239,7 @@ main {
 
 #ingredientsContent, #appareilsContent, #ustensilesContent {
   margin-top: -30px;
-  padding: 11px;
+  padding-right: 19px;
   border: 1px solid transparent;
   border-radius: 5px;
   background-color: #f9f9f9;
@@ -247,23 +247,42 @@ main {
   z-index: 1;
   display: none; /* Masquer par défaut */
   top: 86px;
-  height: 315px;
+  height: 250px;
   width: 177px;
-  overflow-y:scroll ;
-  scrollbar-width: 2px ;
-  scrollbar-color: white;
- 
-
+  overflow-y: scroll;
 }
 
--webkit-scrollbar-track {
-  fond : transparent ;}
+/* Masquer la barre de défilement pour les navigateurs Webkit (Chrome, Safari) */
+#ingredientsContent::-webkit-scrollbar, 
+#appareilsContent::-webkit-scrollbar, 
+#ustensilesContent::-webkit-scrollbar {
+  display: none;
+}
 
+/* Masquer la barre de défilement pour Firefox */
+#ingredientsContent {
+  scrollbar-width: none; /* Firefox */
+}
 
+#appareilsContent {
+  scrollbar-width: none; /* Firefox */
+}
+
+#ustensilesContent {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Optionnel : pour Internet Explorer et Edge (anciennes versions) */
+#ingredientsContent, 
+#appareilsContent, 
+#ustensilesContent {
+  -ms-overflow-style: none; /* IE and Edge */
+}
 
 ul {
+  padding:0px;
   list-style-type: none;
-  padding: 15px;
+
 }
 
 li {
@@ -291,6 +310,7 @@ li.ustensile-tag:hover {
 
 #search-Input,#search--Input,#search---Input {
   width: 139.5px;
+  margin-left: 15px;
   padding:10px 5px;
   border: 1px solid #ccc;
 
@@ -304,8 +324,8 @@ li.ustensile-tag:hover {
 .ingredient-tag, .appareil-tag, .ustensile-tag, .selected-tag  {
   display: inline-block;
   padding: 5px 20px;
-  margin: 5px;
   font-size: 14px;
+  width: 100%;
   cursor: pointer;
 }
 #tagsContainer {
@@ -315,6 +335,7 @@ li.ustensile-tag:hover {
   flex-direction:column;
 }
 .selected-tag {
+  margin-top: 20px;
   padding: 5px 10px;
   display: inline-flex;
   justify-content: end;

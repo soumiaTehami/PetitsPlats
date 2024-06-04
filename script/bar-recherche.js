@@ -7,15 +7,25 @@ export function rechercherRecettes(term) {
     return recipes.filter(recipe => {
         const nameMatch = recipe.name.toLowerCase().includes(termLowerCase);
         const descriptionMatch = recipe.description.toLowerCase().includes(termLowerCase);
-        const ingredientsMatch = searchTerms.every(searchTerm =>
+
+        // Check if the entire search term matches any ingredient as a whole phrase
+        const phraseMatch = recipe.ingredients.some(ingredient =>
+            typeof ingredient === 'string' && ingredient.toLowerCase().includes(termLowerCase)
+        );
+
+        // Check if each word of the search term is in any of the ingredients
+        const wordsMatch = searchTerms.every(searchTerm =>
             recipe.ingredients.some(ingredient =>
                 typeof ingredient === 'string' && ingredient.toLowerCase().includes(searchTerm)
             )
         );
 
-        return nameMatch || descriptionMatch || ingredientsMatch;
+        return nameMatch || descriptionMatch || phraseMatch || wordsMatch;
     });
 }
+
+
+
 
 export function afficherCartesRecettes(term) {
     const recipeContainer = document.getElementById('recipeList');
