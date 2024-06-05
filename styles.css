@@ -41,17 +41,24 @@ body {
     font-size: 22px;
     padding-left: 20px;
 }
+    
 /* Styles pour l'icône de recherche */
 .fa-stack {
   position: absolute;
-  top: 35px;
+  top: 30px;
   transform: translateY(-50%);
-  right: 80px; /* Ajustez la position selon vos besoins */
+  right: 90px; /* Ajustez la position selon vos besoins */
 }
 
-.fa-stack .fa-stack-2x {
-  color: #070606; /* Couleur du carré de fond */
+.fa-stack,.fa-stack-2x {
+  cursor: pointer;
+
 }
+
+.fa-stack:hover .fa-stack-2x {
+  color: #FFD15B; /* Couleur de fond au survol */
+}
+
 
 .fa-stack .fa-stack-1x {
   position: absolute;
@@ -59,4 +66,305 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff; /* Couleur de l'icône de recherche */
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 300px; /* Ajustez cette valeur selon vos besoins */
+  cursor: pointer;
+  color: rgb(122, 122, 122);
+  font-size: 2.5rem; /* Taille de la police */
+  display: none;
+}
+.clear-search,.clearsearch,.clearsearch-btn {
+  cursor: pointer;
+  color:#000;
+
+  transform: translate(70%, -140%);
+  display: none;
+  
+}
+
+/* Conteneur des cartes de recettes */
+#recipeList {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux éléments de se réorganiser sur plusieurs lignes si nécessaire */
+  justify-content: space-between; /* Pour espacer les cartes de manière égale sur la ligne */
+  gap: 5px;
+  padding-top: 20px;
+}
+
+/* Style de base des cartes de recettes */
+.recipe-card {
+  width: calc(33.33% - 10px); /* Largeur de chaque carte (33.33% pour trois cartes sur la même ligne) */
+  margin-bottom: 20px; /* Marge en bas pour séparer les lignes */
+  box-sizing: border-box; /* Pour inclure les marges et bordures dans la largeur */
+  border: 1px solid #ccc; /* Bordure de chaque carte */
+  background-color: #fff;
+  padding: 10px; /* Espacement interne des cartes */
+}
+
+/* Style spécifique pour l'image dans les cartes */
+.recipe-card  {
+  border-radius: 5px;
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, .1);
+    height: 700px;
+    width: 380px;
+    padding: 0px;
+    background-color: #fff;
+    overflow: hidden;
+}
+main {
+  padding: 20px 100px;
+  background: #ededed;
+  height: 100%;
+}
+.recipe-title {
+  font-family: Anton, Arial, Sans-serif;
+  font-size: 18px;
+  font-weight: bold; /* Définit le texte en gras */
+  margin-top: 0;
+  padding-left: 15px;
+}
+.recipe-section-title{
+  font-family: Manrope, Arial, Sans-serif;
+    font-size: 12px;
+    padding: 0 15px 3px;
+    font-weight: 700;
+    color:#7a7a7a;
+    margin-bottom: 10px;
+}
+.recipe-descriptions {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 15px 0px;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 104px;
+  line-height: 1.2em;
+  margin-bottom: 0;
+  display: -webkit-box;
+}
+
+.recipe-image{
+  width:380px;
+    height: 253px;
+    border-radius: 5px;
+    object-fit: cover;
+
+}
+.recipe-duration{
+  font-size: 12px;
+    font-weight: 400;
+    position: relative;
+    background-color:#ffd15b;
+    bottom: 240px;
+    left: 300px;
+    height: 23px;
+    width: 65px;
+    border-radius: 14px;
+    display: block;
+    text-align: center;
+    padding-top: 5px;
+}
+.recipe-ingredient-list{
+  font-family: Manrope, Arial, Sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    list-style-type: none;
+}
+.ingredient{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+}
+.quantity-unit{
+  font-family:Manrope, Arial, Sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #7a7a7a;
+}
+.IngredientsName{
+  font-family:Manrope, Arial, Sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: -5px;
+    margin-top: -5px;
+}/* Style pour le bouton dropdown */
+.dropdown-btn {
+  background-color: #f9f9f9;
+  color: #333;
+  border-radius: 11px;
+  gap: 30px;
+  padding: 0px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between; /* Aligne les éléments sur les bords du conteneur */
+  align-items: center; /* Centre les éléments verticalement */
+  text-align: center;
+  outline: none;
+  width: 200px;
+}
+
+.dropdown-btn div {
+  display: flex;
+  align-items: center; /* Centre les éléments verticalement */
+  gap: 40px;
+}
+
+
+/* Style pour le contenu du dropdown */
+.dropdown-content {
+  display: none;
+  padding: 5px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.dropdowns {
+  display: flex;
+  position: relative;
+  display: inline-block;
+}
+
+#ingredientsContent, #appareilsContent, #ustensilesContent {
+  margin-top: -30px;
+  padding-right: 19px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  position: absolute;
+  z-index: 1;
+  display: none; /* Masquer par défaut */
+  top: 86px;
+  height: 250px;
+  width: 177px;
+  overflow-y: scroll;
+}
+
+/* Masquer la barre de défilement pour les navigateurs Webkit (Chrome, Safari) */
+#ingredientsContent::-webkit-scrollbar, 
+#appareilsContent::-webkit-scrollbar, 
+#ustensilesContent::-webkit-scrollbar {
+  display: none;
+}
+
+/* Masquer la barre de défilement pour Firefox */
+#ingredientsContent {
+  scrollbar-width: none; /* Firefox */
+}
+
+#appareilsContent {
+  scrollbar-width: none; /* Firefox */
+}
+
+#ustensilesContent {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Optionnel : pour Internet Explorer et Edge (anciennes versions) */
+#ingredientsContent, 
+#appareilsContent, 
+#ustensilesContent {
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+ul {
+  padding:0px;
+  list-style-type: none;
+
+}
+
+li {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+li.ingredient-tag:hover {
+  background-color:#ffd15b;
+}
+li.appareil-tag:hover{
+  background-color:#ffd15b;
+}
+li.ustensile-tag:hover {
+  background-color:#ffd15b;
+}
+.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+.dropdown-container{
+  display:flex;
+  gap: 60px;
+}
+
+#search-Input,#search--Input,#search---Input {
+  width: 139.5px;
+  margin-left: 15px;
+  padding:10px 5px;
+  border: 1px solid #ccc;
+
+}
+
+#searchIcon {
+  margin-left: -30px; /* Pour placer l'icône à l'intérieur du champ de recherche */
+  cursor: pointer;
+  font-size: 12px;
+}
+.ingredient-tag, .appareil-tag, .ustensile-tag, .selected-tag  {
+  display: inline-block;
+  padding: 5px 20px;
+  font-size: 14px;
+  width: 100%;
+  cursor: pointer;
+}
+#tagsContainer {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-direction:column;
+}
+.selected-tag {
+  margin-top: 20px;
+  padding: 5px 10px;
+  display: inline-flex;
+  justify-content: end;
+    gap: 60px;
+    border-radius: 10px;
+    background:#ffd15b;;
+    color: #000;
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 175px;
+  
+}
+
+.close-button {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  color:#000;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color:#000;;
+}
+.container{
+  display: flex;
+  justify-content:space-between;
+
 }
