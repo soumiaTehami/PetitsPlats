@@ -368,3 +368,11 @@ li.ustensile-tag:hover {
   justify-content:space-between;
 
 }
+.closebutton {
+  display: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.ingredient-tag:hover .closebutton {
+  display: inline;
+}

@@ -58,8 +58,15 @@ export function addTag(item, type) {
     }
 
     let tagsContainer = document.getElementById('tagsContainer-' + type);
+    if (!tagsContainer) {
+        console.error('Tags container not found.');
+        return;
+    }
+
+    // Create the tag
     let tag = document.createElement('div');
     tag.classList.add('selected-tag');
+    tag.setAttribute('data-item', item);
     
     let tagText = document.createElement('span');
     tagText.textContent = item;
@@ -68,10 +75,12 @@ export function addTag(item, type) {
     closeButton.textContent = 'X';
     closeButton.classList.add('close-button');
     
-    closeButton.addEventListener('click', function() {
+    closeButton.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevent triggering the parent click event
         tagsContainer.removeChild(tag);
         selectedSet.delete(item);
         afficherCartesRecettesFiltrees();
+        console.log(`Tag supprimé: ${item}, Type: ${type}`);
     });
     
     tag.appendChild(tagText);
@@ -83,6 +92,9 @@ export function addTag(item, type) {
     afficherCartesRecettesFiltrees();
     console.log(`Tag ajouté: ${item}, Type: ${type}`);
 }
+
+
+
 
 function rechercherRecettesParTags(ingredients, appareils, ustensiles) {
     return recipes.filter(recipe => {

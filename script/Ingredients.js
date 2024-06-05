@@ -21,8 +21,28 @@ export function displayAllIngredients(filter = '') {
                         let li = document.createElement('li');
                         li.textContent = ingredient;
                         li.classList.add('ingredient-tag');
+
+                        // Create the 'X' button
+                        let closeButton = document.createElement('span');
+                        closeButton.textContent = 'X';
+                        closeButton.classList.add('closebutton');
+                        closeButton.addEventListener('click', function(event) {
+                            event.stopPropagation(); // Prevent triggering the parent click event
+
+                            // Remove the corresponding selected tag
+                            let selectedTag = document.querySelector(`.selected-tag[data-item="${ingredient}"]`);
+                            if (selectedTag) {
+                                selectedTag.parentNode.removeChild(selectedTag);
+                            }
+
+                            // Optionally remove the ingredient from any other list
+                            // ingredientsList.removeChild(li);
+                        });
+
+                        li.appendChild(closeButton);
                         ingredientsList.appendChild(li);
                         seenIngredients.add(normalizedIngredient);
+
                         li.addEventListener('click', function() {
                             addTag(ingredient, 'ingredient');
                         });
@@ -41,6 +61,18 @@ export function displayAllIngredients(filter = '') {
         console.error('Element ingredientsList not found.');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-Input');
