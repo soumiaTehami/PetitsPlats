@@ -1,26 +1,28 @@
 export function updateRecipeCount() {
-    // Select the element that will display the number of recipes
-    const recipesNumberElement = document.querySelector('.recipesNumber');
-    
-    // Select all .recipe-card elements
-    const allRecipes = document.querySelectorAll('.recipe-card');
-    const recipeContainer = document.getElementById('recipeList');
-    // Get the search input value
-  const searchInput = document.querySelector('#searchInput'); // Assuming there's an input with this ID
+  // Sélectionner l'élément qui affichera le nombre de recettes
+  const recipesNumberElement = document.querySelector('.recipesNumber');
+  
+  // Sélectionner tous les éléments .recipe-card
+  const allRecipes = document.querySelectorAll('.recipe-card');
+  const recipeContainer = document.getElementById('recipeList');
+  
+  // Obtenir la valeur de l'entrée de recherche
+  const searchInput = document.querySelector('#searchInput'); // Supposons qu'il y ait un input avec cet ID
   const searchTerm = searchInput ? searchInput.value : 'XXX';
   
-    // Update the .recipesNumber element with the number of recipes
-    if (allRecipes.length === 0) {
-        recipesNumberElement.textContent = ''; // Clear the previous count message if no recipes are found
-        recipeContainer.innerHTML = `<p>Aucune recette ne contient ‘${searchTerm}’, vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
-      } else if (allRecipes.length === 1) {
+  // Mettre à jour l'élément .recipesNumber avec le nombre de recettes
+  if (allRecipes.length === 0) {
+      recipesNumberElement.textContent = ''; // Effacer le message de compte précédent si aucune recette n'est trouvée
+      recipeContainer.innerHTML = `<p>Aucune recette ne contient ‘${searchTerm}’, vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
+  } else if (allRecipes.length === 1) {
       recipesNumberElement.textContent = '1 recette';
-    } else {
+  } else {
       recipesNumberElement.textContent = allRecipes.length + ' recettes';
-    }
   }
-  // Run the updateRecipeCount function when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    updateRecipeCount();
-  });
-  
+}
+
+// Exécuter la fonction updateRecipeCount lorsque le DOM est entièrement chargé
+document.addEventListener('DOMContentLoaded', function() {
+  updateRecipeCount();
+});
+
