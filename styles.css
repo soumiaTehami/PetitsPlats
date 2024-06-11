@@ -212,6 +212,7 @@ main {
   align-items: center; /* Centre les éléments verticalement */
   text-align: center;
   outline: none;
+  height: 60px;
   width: 200px;
 }
 
@@ -316,7 +317,7 @@ li.ustensile-tag:hover {
 
 }
 
-#searchIcon {
+#searchIcon1,#searchIcon2,#searchIcon3{
   margin-left: -30px; /* Pour placer l'icône à l'intérieur du champ de recherche */
   cursor: pointer;
   font-size: 12px;

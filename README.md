@@ -40,10 +40,6 @@ Les performances des deux algorithmes doivent être comparées à l'aide d'un ou
 
 ## Méthodes
 
-### Implémentation de l'interface utilisateur
-
-L'interface utilisateur sera implémentée en JavaScript. Les composants de l'interface seront réutilisables.
-
 ### Implémentation des algorithmes de recherche
 
 Les algorithmes de recherche seront implémentés en JavaScript. Les algorithmes seront optimisés pour la performance.
